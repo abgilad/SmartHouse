@@ -66,3 +66,18 @@
 .itemsMainDiv {
   border: solid black 1px;
 }
+
+.mainBtn {
+  margin-top: 50px;
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 50%;
+  font-size: 50px;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.mainBtn:hover {
+  background-color: rgb(70, 152, 234);
+}
