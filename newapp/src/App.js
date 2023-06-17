@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Logo from './Components/Logo';
 import CreateNewRoomBtn from './Components/CreateNewRoomBtn';
 import ChooseNewRoom from './Components/ChooseNewRoom';
-import { addNumbers } from './myFunctions.js'
+
 
 
 function App() {
 
   const [data, setData] = useState([])
 
-  console.log(addNumbers(5, setData, data));
+
 
   return (
     <div className="App">
