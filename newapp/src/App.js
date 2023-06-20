@@ -4,40 +4,49 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Logo from './Components/Logo';
 import CreateNewRoomBtn from './Components/CreateNewRoomBtn';
 import ChooseNewRoom from './Components/ChooseNewRoom';
+import CurrentRoom from './Components/CurrentRoom';
 
 
 
 function App() {
 
-  const [data, setData] = useState([{choosenRoom:'kitchen',roomName:'Gilad',color:'red'}])
+  const [data, setData] = useState([{ choosenRoom: 'kitchen', roomName: 'Gilad', color: 'red' }])
   console.log(data);
+
+  // Object All data
+
+  const allData = {
+    data: data,
+    setData: setData
+  }
 
   //Functions////////////////////////////////
 
-  const addNewRoom = (chooseRoom,name,color)=>{
-    const findTheSameRoom = data.find((val)=>val.roomName===name);
-    
-     if(findTheSameRoom){
+  const addNewRoom = (chooseRoom, name, color) => {
+    const findTheSameRoom = data.find((val) => val.roomName === name);
+
+    if (findTheSameRoom) {
       return alert('the room name is exist!')
-     }
-     else if(!(findTheSameRoom)){
-      let temp= {
-        choosenRoom:chooseRoom,
-        roomName:name,
+    }
+    else if (!(findTheSameRoom)) {
+      let temp = {
+        choosenRoom: chooseRoom,
+        roomName: name,
         color
       }
-      setData([...data,temp])
-     }
+      setData([...data, temp])
+    }
   }
 
-  
+
 
   return (
     <div className="App">
       <Logo />
       <Routes>
-        <Route path='/' element={<CreateNewRoomBtn />} />
-        <Route path='/ChooseNewRoom' element={<ChooseNewRoom addNewRoom={addNewRoom}/>} />
+        <Route path='/' element={<CreateNewRoomBtn allData={allData} />} />
+        <Route path='/ChooseNewRoom' element={<ChooseNewRoom addNewRoom={addNewRoom} />} />
+        <Route path='/currentRoom' element={<CurrentRoom />} />
       </Routes>
     </div>
   );
