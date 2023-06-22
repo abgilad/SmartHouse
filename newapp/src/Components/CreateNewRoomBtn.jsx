@@ -4,10 +4,7 @@ import Room from './Room'
 
 export default function CreateNewRoomBtn({ allData, enterToCurrentRoom }) {
 
-    const enterToCurrentRoom = (index) => {
-        const findRoom = allData.data.find((val, i) => i == index);
 
-    }
 
 
 
