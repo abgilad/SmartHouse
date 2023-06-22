@@ -10,7 +10,7 @@ import CurrentRoom from './Components/CurrentRoom';
 
 function App() {
 
-  const [data, setData] = useState([{ id: 1, choosenRoom: 'kitchen', roomName: 'Gilad', color: 'red', items: [] }])
+  const [data, setData] = useState([{ id: 1, choosenRoom: 'kitchen', roomName: 'Gilad', color: 'red', items: [{ itemName: 'conditioner', itemState: 'false', colorState: 'red' }] }])
   const [currentRoomIndex, setCurrentRoomIndex] = useState('')
   const [cnt, setCnt] = useState(1)
 
@@ -32,7 +32,7 @@ function App() {
     else if (!(findTheSameRoom)) {
 
       let temp = {
-        id: cnt,
+
         choosenRoom: chooseRoom,
         roomName: name,
         color,
@@ -53,7 +53,8 @@ function App() {
   const addNewItemToRoom = (item, index) => {
     let temp = {
       itemName: item,
-      itemState: 'false'
+      itemState: 'false',
+      colorState: 'red'
     }
 
     const findRoom = data.find((val, i) => i == index)

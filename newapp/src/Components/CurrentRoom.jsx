@@ -24,7 +24,7 @@ export default function CurrentRoom({ allData }) {
 
     const viewAddedItems = () => {
         return currentRoomItems.items.map((val, i) => {
-            return <AddedItems key={currentRoomItems.id} addedItems={val} index={i} />
+            return <AddedItems key={i} addedItems={val} index={i} />
         })
     }
 
