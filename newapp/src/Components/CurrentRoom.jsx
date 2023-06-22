@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react'
 import SelectNewItem from './SelectNewItem'
+import AddedItems from './AddedItems'
 
 export default function CurrentRoom({ allData }) {
 
@@ -17,8 +18,14 @@ export default function CurrentRoom({ allData }) {
 
     const viewAddNewItems = () => {
         if (flag == true) {
-            return <SelectNewItem />
+            return <SelectNewItem allData={allData} setFlag={setFlag} />
         }
+    }
+
+    const viewAddedItems = () => {
+        return currentRoomItems.items.map((val, i) => {
+            return <AddedItems key={currentRoomItems.id} addedItems={val} index={i} />
+        })
     }
 
     return (
@@ -26,7 +33,8 @@ export default function CurrentRoom({ allData }) {
             <div>{currentRoomItems.roomName}</div>
             <div>{currentRoomItems.choosenRoom}</div>
             <button onClick={() => { setFlag(!flag) }}>add new item</button><br />
-            {viewAddNewItems()}
+            {viewAddNewItems()}<br />
+            {viewAddedItems()}
         </div>
     )
 }

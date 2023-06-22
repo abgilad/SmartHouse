@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Logo from './Components/Logo';
@@ -10,12 +10,16 @@ import CurrentRoom from './Components/CurrentRoom';
 
 function App() {
 
-  const [data, setData] = useState([{ choosenRoom: 'kitchen', roomName: 'Gilad', color: 'red' }])
+  const [data, setData] = useState([{ id: 1, choosenRoom: 'kitchen', roomName: 'Gilad', color: 'red', items: [] }])
   const [currentRoomIndex, setCurrentRoomIndex] = useState('')
+  const [cnt, setCnt] = useState(1)
+
   console.log(data);
 
 
-
+  useEffect(() => {
+    setCnt(cnt + 1)
+  }, [data])
 
   //Functions////////////////////////////////
 
@@ -26,10 +30,13 @@ function App() {
       return alert('the room name is exist!')
     }
     else if (!(findTheSameRoom)) {
+
       let temp = {
+        id: cnt,
         choosenRoom: chooseRoom,
         roomName: name,
-        color
+        color,
+        items: []
       }
       setData([...data, temp])
     }
@@ -41,6 +48,22 @@ function App() {
     setCurrentRoomIndex(index)
   }
 
+  // function add new item
+
+  const addNewItemToRoom = (item, index) => {
+    let temp = {
+      itemName: item,
+      itemState: 'false'
+    }
+
+    const findRoom = data.find((val, i) => i == index)
+
+    findRoom.items = [...findRoom.items, temp]
+    return findRoom
+  }
+
+  // console.log(addNewItemToRoom('kumkum', 0));
+
   // Object All data
 
   const allData = {
@@ -48,7 +71,7 @@ function App() {
     setData: setData,
     currentRoomIndex: currentRoomIndex,
     setCurrentRoomIndex: setCurrentRoomIndex,
-
+    addNewItemToRoom: addNewItemToRoom
   }
 
   return (
@@ -57,10 +80,7 @@ function App() {
       <Routes>
         <Route path='/' element={<CreateNewRoomBtn allData={allData} enterToCurrentRoom={enterToCurrentRoom} />} />
         <Route path='/ChooseNewRoom' element={<ChooseNewRoom addNewRoom={addNewRoom} />} />
-        <Route path='/currentRoom:id' element={<CurrentRoom allData={allData} />} />
-        <Route path='/' element={<CreateNewRoomBtn allData={allData} />} />
-        <Route path='/ChooseNewRoom' element={<ChooseNewRoom addNewRoom={addNewRoom} />} />
-        <Route path='/currentRoom' element={<CurrentRoom />} />
+        <Route path='/currentRoom/:id' element={<CurrentRoom allData={allData} />} />
       </Routes>
     </div>
   );

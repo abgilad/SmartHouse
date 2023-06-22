@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function SelectNewItem() {
+export default function SelectNewItem({ allData, setFlag }) {
 
     const [newRoomItem, setNewRoomItem] = useState('')
 
@@ -13,7 +13,7 @@ export default function SelectNewItem() {
                 <option value='boiler'>boiler</option>
                 <option value='lamp'>lamp</option>
             </select><br />
-            <button>add</button>
-        </div>
+            <button onClick={() => { allData.addNewItemToRoom(newRoomItem, allData.currentRoomIndex); setFlag(false) }}>add</button>
+        </div >
     )
 }
